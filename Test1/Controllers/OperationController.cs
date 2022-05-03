@@ -33,6 +33,32 @@ namespace Test1.Controllers
         }
         #endregion
 
+        [HttpGet]
+        [Route("GetTest")]
+        public async Task<ResponseModel> GetTest()
+        {
+            ResponseModel objResponseModel = new ResponseModel();
+            try
+            {
+                //Methode for getting vendor list by type
+
+                string statusMessage = "OK";
+                objResponseModel.status = true;
+                objResponseModel.statusCode = (int)HttpStatusCode.OK;
+                objResponseModel.message = statusMessage;
+                objResponseModel.responseData = "HELLO WORLD";
+            }
+            catch (Exception ex)
+            {
+                //Can also log the errors
+                objResponseModel.message = "Error : " + ex.Message;
+                objResponseModel.statusCode = (int)HttpStatusCode.InternalServerError;
+                objResponseModel.status = false;
+            }
+
+            return await Task.FromResult(objResponseModel);
+        }
+
 
         [HttpPost]
         [Route("DeleteFolderFile")]
